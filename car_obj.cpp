@@ -9,10 +9,11 @@ class car_obj
 	bool door = false;
 	bool light = false;
 	bool alarm = false;
+	bool conder = false;
 	string name = "";
 	string color = "";
 
-public:	car_obj() :music(false), door(false), light(false), name(""), color(""), alarm(false) {}
+public:	car_obj() :music(false), door(false), light(false), name(""), color(""), alarm(false), conder(false) {}
 
 	  car_obj car_list_ch(car_obj _s)
 	  {
@@ -22,6 +23,7 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 		  color = _s.color;
 		  light = _s.light;
 		  alarm = _s.alarm;
+		  conder = _s.conder;
 		  return(_s);
 	  }
 
@@ -121,6 +123,19 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 			  system("pause");
 		  }
 	  }
+	  void car_ch_conder()
+	  {
+		  if (conder == false) {
+			  conder = true;
+			  cout << "Кондиционер был подключен." << endl;
+			  system("pause");
+		  }
+		  else {
+			  conder = false;
+			  cout << "Кондиционер был отключен." << endl;
+			  system("pause");
+		  }
+	  }
 
 	  void car_delete()
 	  {
@@ -128,6 +143,9 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 		  door = false;
 		  name = "";
 		  color = "";
+		  light = false;
+		  conder = false;
+		  alarm = false;
 	  }
 
 	  string _M()
@@ -137,8 +155,8 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 	  }
 	  string _l()
 	  {
-		  if (light == false) return("закрыта");
-		  else return("открыта");
+		  if (light == false) return("выкл");
+		  else return("вкл");
 	  }
 	  string _d()
 	  {
@@ -148,6 +166,11 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 	  string _a()
 	  {
 		  if (alarm == false) return("is Off");
+		  else return("is on");
+	  }
+	  string _c()
+	  {
+		  if (conder == false) return("is Off");
 		  else return("is on");
 	  }
 
@@ -161,7 +184,7 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 		  if (name == "");
 		  else
 		  {
-			  cout << num << " - " << "Название: " << name << "	Цвет: " << color << "	Музыка: " << _M() << " Свет: " << _l()<< "	дверь: " << _d() << " Сигнализация: " << _a() << endl;
+			  cout << num << " - " << "Название: " << name << "	Цвет: " << color << "Музыка: " << _M() << " Свет: " << _l()<< "	Дверь: " << _d() << " Сигнализация: " << _a() << " Кондиционер: " << _c() << endl;
 		  }
 	  }
 
@@ -177,6 +200,7 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 		  case 6: {flag = true; break; }
 		  case 7: {car_ch_light(); break; }
 		  case 8: {car_ch_alarm(); break; }
+		  case 9: {car_ch_conder(); break; }
 				system("pause");
 		  }
 		  return(flag);
@@ -190,7 +214,7 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 			  if (name == "") car_create();
 
 			  cout << endl << "Название: " << name << endl << "Цвет: " << color << endl;
-			  cout << "Музыка: " << _M() << endl << "дверь: " << _d()<<"Свет:"<<_l() << " Сигнализация: " << _a() << endl;
+			  cout << "Музыка: " << _M() << endl << "Дверь: " << _d()<<" Свет: "<<_l() << " Сигнализация: " << _a() << " Кондиционер: " << _c() << endl;
 
 			  cout << "Что вы хотите сделать?:" << endl <<
 				  "1 - Изменить имя" << endl <<
@@ -200,7 +224,8 @@ public:	car_obj() :music(false), door(false), light(false), name(""), color(""),
 				  "5 - Удалить авто" << endl <<
 				  "6 - Сменить авто" << endl <<
 				  "7 - вкл/выкл свет" << endl <<
-				  "8 - вкл/выкл сигнализацию" << endl;
+				  "8 - вкл/выкл сигнализацию" << endl <<
+				  "9 - вкл/выкл кондиционер" << endl;
 			  int com = 0;
 			  cin >> com;
 			  flag = select(com, flag);

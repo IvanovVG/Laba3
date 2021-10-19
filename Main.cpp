@@ -10,6 +10,7 @@ bool* music;
 bool* light;
 bool* door;
 bool* alarm;
+bool* conder;
 string name[100000];
 string color[100000];
 
@@ -93,6 +94,20 @@ void car_ch_alarm(int num)
 		system("pause");
 	}
 }
+
+void car_ch_conder(int num)
+{
+	if (alarm[num] == false) {
+		alarm[num] = true;
+		cout << "Кондиционер был включен." << endl;
+		system("pause");
+	}
+	else {
+		alarm[num] = false;
+		cout << "Кондицинер был выключен." << endl;
+		system("pause");
+	}
+}
 void car_delete(int num)
 {
 	music[num] = false;
@@ -100,6 +115,7 @@ void car_delete(int num)
 	light[num] = false;
 	name[num] = "";
 	color[num] = "";
+	conder[num] = false;
 }
 
 string _M(int num)
@@ -125,6 +141,12 @@ string _d(int num)
 	else return("открыта");
 }
 
+string _c(int num)
+{
+	if (conder[num] == false) return("отключен");
+	else return("включен");
+}
+
 string name_f(car_obj _s)
 {
 	string l;
@@ -137,7 +159,7 @@ void car_list_out(int num)
 	if (name[num] == "")	cout << num << " - машина не создана." << endl;
 	else
 	{
-		cout << num << " - " << "Название: " << name[num] << "	Цвет: " << color[num] << " Свет: " << _l(light[num]) << "Музыка: " << _M(music[num]) << " Дверь: " << _d(door[num]) << endl;
+		cout << num << " - " << "Название: " << name[num] << "	Цвет: " << color[num] << " Свет: " << _l(light[num]) << "Музыка: " << _M(music[num]) << " Дверь: " << _d(door[num]) << " Сигнализация: " << _a(alarm[num]) << " Кондиционер: " << _c(conder[num]) << endl;
 	}
 }
 
@@ -153,6 +175,7 @@ bool select(int com, bool flag, int num)
 	case 6: {flag = true; break; }
 	case 7: {car_ch_light(num); break; }
 	case 8: {car_ch_alarm(num); break; }
+	case 9: {car_ch_conder(num); break; }
 		  system("pause");
 	}
 	return(flag);
@@ -180,9 +203,9 @@ void main()
 		{
 			cout << "Если вы хотите выйти из программы 0" << endl;
 
-			cout << "If you want to check all car press: -1 . Else press enything else to select car." << endl;
+			cout << "Если вы хотите посмотреть все машины, нажмите: -1 . Если машины не созданы, создайте." << endl;
 
-			cout << "The car:" << endl;
+			cout << "Номер машины:" << endl;
 
 			cin >> num;
 
@@ -499,12 +522,12 @@ void main()
 				case 4: /*music change	*/ {
 					if (music[NUM_STR] == false) {
 						music[NUM_STR] = true;
-						cout << "Свет был включён." << endl;
+						cout << "музыка был включена." << endl;
 						system("pause");
 					}
 					else {
 						music[NUM_STR] = false;
-						cout << "Свет был выключен." << endl;
+						cout << "Музыка был выключена." << endl;
 						system("pause");
 					} break; }
 				case 5: /*Delete car	*/ {
